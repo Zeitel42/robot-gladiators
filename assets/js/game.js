@@ -1,3 +1,44 @@
+var startGame = function() {
+    // reset player stats
+  
+    playerInfo.reset();
+   
+       for (var i = 0; i < enemyInfo.length; i++){
+       
+           if(playerInfo.health > 0){
+
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+   
+            debugger;
+   
+               var pickedEnemyObj = enemyInfo[i];
+   
+               pickedEnemyObj.health = randomNumber(40, 60);
+   
+               fight(pickedEnemyObj);
+   
+               if(playerInfo.health > 0 && i < enemyInfo.length - 1){
+   
+   //confirm player wants to enter the shop prior to next round
+   
+                   var confirmShop = window.confirm("Do you wish to enter the shop before your next round?");
+                   if(confirmShop){
+                       shop();
+                   }
+                 
+               }
+   
+           }
+           // else{
+           // //     window.alert("You have lost your robot in battle! Game Over!");
+           // // }
+       
+       }
+   // end of loop, player is either dead or has killed all enemy robots.
+       endGame();
+   };
+
+// FIGHT
 
 var fight = function(enemy) {
 
@@ -72,9 +113,17 @@ var randomNumber = function(min, max){
 
     return value;
 }
+var getPlayerName = function(){
+
+    var name = "";
+
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?");
+      }
+}
 
 var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
@@ -125,43 +174,7 @@ var enemyInfo = [
     }
   ];
 
-var startGame = function() {
- // reset player stats
-
- playerInfo.reset();
-
-    for (var i = 0; i < enemyInfo.length; i++){
-    
-        if(playerInfo.health > 0){
-
-            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-
-            var pickedEnemyObj = enemyInfo[i];
-
-            pickedEnemyObj.health = randomNumber(40, 60);
-
-            fight(pickedEnemyObj);
-
-            if(playerInfo.health > 0 && i < enemyInfo.length - 1){
-
-//confirm player wants to enter the shop prior to next round
-
-                var confirmShop = window.confirm("Do you wish to enter the shop before your next round?");
-                if(confirmShop){
-                    shop();
-                }
-              
-            }
-
-        }
-        // else{
-        // //     window.alert("You have lost your robot in battle! Game Over!");
-        // // }
-    
-    }
-// end of loop, player is either dead or has killed all enemy robots.
-    endGame();
-};
+//   ENDGAME 
 
 var endGame = function(){
     
