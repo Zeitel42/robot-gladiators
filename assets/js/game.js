@@ -219,10 +219,23 @@ var enemyInfo = [
 //   ENDGAME 
 
 var endGame = function(){
-    
+    var playerScore = playerInfo.money;
 // if player is still alive, player wins!
     if (playerInfo.health > 0) {
-        window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + ".");
+
+        window.alert("Great job, you've survived the game! You now have a score of " + playerScore + ".");
+
+        var highScore = localStorage.getItem("highScore");
+        var highScoreName = localStorage.getItem("playerName");
+
+        if(playerScore > highScore){
+            localStorage.setItem("highScore", playerScore);
+            window.alert("You've beaten the high score previously held by " + highScoreName + "!! The new high score is " + playerScore + "!");
+            localStorage.setItem("playerName", playerInfo.name);
+            console.log()
+        }else{
+           window.alert("The high score is " + highScore + " held by " + highScoreName);
+        }
     } 
     else {
         window.alert("You've lost your robot in battle.");
